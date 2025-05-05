@@ -1,0 +1,5 @@
+/home/ajlevin/school/multimedia/projet/build/CMakeFiles/Editor.dir
+/home/ajlevin/school/multimedia/projet/build/CMakeFiles/inputHelper.dir
+/home/ajlevin/school/multimedia/projet/build/CMakeFiles/transformations.dir
+/home/ajlevin/school/multimedia/projet/build/CMakeFiles/edit_cache.dir
+/home/ajlevin/school/multimedia/projet/build/CMakeFiles/rebuild_cache.dir

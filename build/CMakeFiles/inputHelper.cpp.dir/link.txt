@@ -1,0 +1,2 @@
+/usr/bin/ar qc libinputHelper.cpp.a CMakeFiles/inputHelper.cpp.dir/transformations.cpp.o
+/usr/bin/ranlib libinputHelper.cpp.a

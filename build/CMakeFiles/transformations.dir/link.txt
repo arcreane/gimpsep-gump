@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtransformations.a CMakeFiles/transformations.dir/transformations.cpp.o
+/usr/bin/ranlib libtransformations.a
