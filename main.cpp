@@ -51,17 +51,19 @@ int loadFile(cv::Mat& source)
     
     printf("Enter the name of the file you'd like to load:\n");
     while(retryCount) {
-        std::string fileName = "dave.png";
+        std::string fileName = "davec.JPG";
         source = cv::imread(fileName, cv::IMREAD_COLOR);
 
         if (!source.data) {
             retryCount--;
             if (retryCount) {
-                std::printf("No image data found. Please enter a valid image file. \n");
+                printf("No image data found. Please enter a valid image file.\n");
             } else {
                 printf("No image data found: Closing application.\n");
                 return -1;
             }
+        } else {
+            return 0;
         }
     }
 
@@ -92,8 +94,9 @@ void restore(cv::Mat& source, cv::Mat& edited)
 void saveFile(cv::Mat& edited)
 {
     std::string outputName;
-    std::cout << "Please enter the name of the output file (extension included):\n" << std::endl;
-    std::cin >> outputName;
+    std::string promptString = "Please enter the name of the output file (extension included):\n";
+    std::vector<std::string> validInputs = {};
+    inputValidator(outputName, 3, promptString, validInputs);
     imwrite(outputName, edited);
 }
 
@@ -106,19 +109,20 @@ int main(int argc, char* argv[])
     
     bool active = true;
     std::string opInput;
+    std::string promptString = "Please enter your desired operation:\n \
+        [Restore, Save, Dilate, Erode, Resize, Lighten, Darken, Stitch, Canny (for Canny Edge Detection)]\n";
+    std::vector<std::string> validInputs = {"RESTORE, DILATE, ERODE, RESIZE, LIGHTEN, DARKEN, STITCH, CANNY"};
 
     if (loadFile(source) == -1) {
         return -1;
     } else {
-        edited = source;
+        edited = source;    
     }
     
-    printf("Please enter your desired operation:\n");
-    printf("[Restore, Dilate, Erode, Resize, Lighten, Darken, Dilate, Stitch, Canny Edge Detection]\n");
-    std::cin >> opInput;
-    stringToUpper(opInput);
-
     while (active) {
+        inputValidator(opInput, 3, promptString, validInputs);
+        stringToUpper(opInput);
+        
         switch(OP_TABLE.at(opInput)) {
             case DILATE:
                 dilate(edited);
@@ -146,13 +150,8 @@ int main(int argc, char* argv[])
                 active = false;
                 break;
             default:
-                printf("Invalid operation entered.\n");
+                printf("-- Invalid operation request. --\n");
                 break;
-        }
-        
-        if (active) {
-            printf("Please enter your desired operation:\n");
-            printf("[Dilate, Erode, Resize, Lighten, Darken, Dilate, Stitch, Canny Edge Detection, Save]\n");
         }
     }
 

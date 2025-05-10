@@ -21,7 +21,7 @@ void stringToUpper(std::string& txt)
 /// @param inputtedString string to contain a valid user-inputted string
 /// @param retries number of retries allowed for the user before failure
 /// @param promptString the prompt sent to the user
-/// @param validInputs vector of all possible valid strings
+/// @param validInputs vector of all possible valid strings in all caps. If empty, all inputs are valid
 /// @return 0 for success, -1 for failure
 int inputValidator(std::string& inputtedString, int retries, std::string promptString, std::vector<std::string> validInputs)
 {
@@ -29,8 +29,9 @@ int inputValidator(std::string& inputtedString, int retries, std::string promptS
     while(attempts < retries) {
         std::cout << promptString << std::endl;
         std::cin >> inputtedString;
+        stringToUpper(inputtedString);
 
-        if (!validInputs.empty() && std::find(validInputs.begin(), validInputs.end(), inputtedString) != validInputs.end()) {
+        if (validInputs.empty() || std::find(validInputs.begin(), validInputs.end(), inputtedString) != validInputs.end()) {
             return 0;
         }
 
