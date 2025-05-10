@@ -51,7 +51,8 @@ int loadFile(cv::Mat& source)
     
     printf("Enter the name of the file you'd like to load:\n");
     while(retryCount) {
-        std::string fileName = "davec.JPG";
+        std::string fileName;
+        std::cin >> fileName;
         source = cv::imread(fileName, cv::IMREAD_COLOR);
 
         if (!source.data) {
@@ -79,7 +80,7 @@ void restore(cv::Mat& source, cv::Mat& edited)
 
     printf("Restoring the image will wipe all current edits.\n");
     printf("There is no way to reverse this operation.\n");
-    printf("Would you like to continue? [y/n]: \n");
+    printf("Would you like to continue? [y/n]: ");
     std::cin >> userInput;
     stringToLower(userInput);
 
@@ -96,7 +97,7 @@ void saveFile(cv::Mat& edited)
     std::string outputName;
     std::string promptString = "Please enter the name of the output file (extension included):\n";
     std::vector<std::string> validInputs = {};
-    inputValidator(outputName, 3, promptString, validInputs);
+    stringInputValidator(outputName, 3, promptString, validInputs);
     imwrite(outputName, edited);
 }
 
@@ -111,7 +112,16 @@ int main(int argc, char* argv[])
     std::string opInput;
     std::string promptString = "Please enter your desired operation:\n \
         [Restore, Save, Dilate, Erode, Resize, Lighten, Darken, Stitch, Canny (for Canny Edge Detection)]\n";
-    std::vector<std::string> validInputs = {"RESTORE, DILATE, ERODE, RESIZE, LIGHTEN, DARKEN, STITCH, CANNY"};
+    std::vector<std::string> validInputs = { 
+        "RESTORE", 
+        "SAVE",
+        "DILATE", 
+        "ERODE", 
+        "RESIZE", 
+        "LIGHTEN", 
+        "DARKEN", 
+        "STITCH", 
+        "CANNY"};
 
     if (loadFile(source) == -1) {
         return -1;
@@ -120,7 +130,9 @@ int main(int argc, char* argv[])
     }
     
     while (active) {
-        inputValidator(opInput, 3, promptString, validInputs);
+        if (stringInputValidator(opInput, 3, promptString, validInputs) == -1) {
+            return -1;
+        }
         stringToUpper(opInput);
         
         switch(OP_TABLE.at(opInput)) {
