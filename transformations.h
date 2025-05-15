@@ -4,18 +4,22 @@
 #include <iostream>
 #include <stdio.h>
 
-void dilate(cv::Mat& edited);
+void dilate(cv::Mat& current, cv::Mat& edited);
 
-void erode(cv::Mat& edited);
+void erode(cv::Mat& current, cv::Mat& edited);
 
-void resize(cv::Mat& edited);
+void resize(cv::Mat& current, cv::Mat& edited);
 
-void lighten(cv::Mat& edited);
+void lighten(cv::Mat& current, cv::Mat& edited);
 
-void darken(cv::Mat& edited);
+void darken(cv::Mat& current, cv::Mat& edited);
 
-void stitch(cv::Mat& edited);
+void stitch(cv::Mat& current, cv::Mat& edited);
 
-void cannyEdgeDetection(cv::Mat& edited);
+void cannyEdgeDetection(cv::Mat& current, cv::Mat& edited);
+
+void restore(cv::Mat& source, cv::Mat& edited);
+
+void saveFile(cv::Mat& edited, bool& active);
 
 #endif /* TRANSFORMATIONS_H */

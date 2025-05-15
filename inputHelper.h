@@ -12,4 +12,12 @@ int stringInputValidator(std::string& inputtedString, int retries, std::string p
 
 int intInputValidator(int& inputtedInt, int retries, std::string promptString, std::pair<int, int> validRange);
 
+int doubleInputValidator(double& inputtedDouble, int retries, std::string promptString, std::pair<double, double> validRange);
+
+int ynInputValidator(bool& inputtedBool, int retries, std::string promptString);
+
+void clearInput();
+
+int parseStitchArgs(std::vector<cv::Mat>& imgs, cv::Mat& current);
+
 #endif /* INPUT_HELPER_H */

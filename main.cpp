@@ -30,6 +30,7 @@ enum Operation {
     SAVE
 };
 
+/// @brief mapping of string to operation type
 const std::unordered_map<std::string, Operation> OP_TABLE = { 
     {"RESTORE", RESTORE},
     {"DILATE", DILATE},
@@ -53,7 +54,10 @@ int loadFile(cv::Mat& source)
     while(retryCount) {
         std::string fileName;
         std::cin >> fileName;
-        source = cv::imread(fileName, cv::IMREAD_COLOR);
+        clearInput();
+        // source = cv::imread(fileName, cv::IMREAD_COLOR);
+        source = cv::imread(cv::samples::findFile(fileName), cv::IMREAD_COLOR);
+        source.convertTo(source, CV_8U);
 
         if (!source.data) {
             retryCount--;
@@ -71,39 +75,9 @@ int loadFile(cv::Mat& source)
     return 0;
 }
 
-/// @brief removes all current unsaved edits and restores the original file
-/// @param source 
-/// @param edited 
-void restore(cv::Mat& source, cv::Mat& edited)
-{
-    std::string userInput;
-
-    printf("Restoring the image will wipe all current edits.\n");
-    printf("There is no way to reverse this operation.\n");
-    printf("Would you like to continue? [y/n]: ");
-    std::cin >> userInput;
-    stringToLower(userInput);
-
-    if (!userInput.compare("y"))
-    {
-        edited = source;
-    }
-}
-
-/// @brief save the current edited file into or onto a file
-/// @param edited 
-void saveFile(cv::Mat& edited)
-{
-    std::string outputName;
-    std::string promptString = "Please enter the name of the output file (extension included):\n";
-    std::vector<std::string> validInputs = {};
-    stringInputValidator(outputName, 3, promptString, validInputs);
-    imwrite(outputName, edited);
-}
-
 int main(int argc, char* argv[])
 {
-    cv::Mat source, edited;
+    cv::Mat source, current, edited;
     // Videocapture cap;
     Operation op = RESTORE;
     File f;
@@ -121,50 +95,55 @@ int main(int argc, char* argv[])
         "LIGHTEN", 
         "DARKEN", 
         "STITCH", 
-        "CANNY"};
+        "CANNY"
+    };
 
     if (loadFile(source) == -1) {
         return -1;
     } else {
-        edited = source;    
+        current = source;  
     }
     
     while (active) {
-        if (stringInputValidator(opInput, 3, promptString, validInputs) == -1) {
+        if (stringInputValidator(opInput, 3, promptString, validInputs)) {
             return -1;
         }
         stringToUpper(opInput);
         
         switch(OP_TABLE.at(opInput)) {
             case DILATE:
-                dilate(edited);
+                dilate(current, edited);
                 break;
             case ERODE:
-                erode(edited);
+                erode(current, edited);
                 break;
             case RESIZE:
-                resize(edited);
+                resize(current, edited);
                 break;
             case LIGHTEN:
-                lighten(edited);
+                lighten(current, edited);
                 break;
             case DARKEN:
-                darken(edited);
+                darken(current, edited);
                 break;
             case STITCH:
-                stitch(edited);
+                stitch(current, edited);
                 break;
             case CANNY:
-                cannyEdgeDetection(edited);
+                cannyEdgeDetection(current, edited);
+                break;
+            case RESTORE:
+                restore(source, edited);
                 break;
             case SAVE:
-                saveFile(edited);
                 active = false;
+                saveFile(edited, active);
                 break;
             default:
                 printf("-- Invalid operation request. --\n");
                 break;
         }
+        current = edited;
     }
 
     // cap.close();
