@@ -1,6 +1,11 @@
 [
 {
   "directory": "/home/ajlevin/school/multimedia/projet/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/record.dir/record.cpp.o -c /home/ajlevin/school/multimedia/projet/record.cpp",
+  "file": "/home/ajlevin/school/multimedia/projet/record.cpp"
+},
+{
+  "directory": "/home/ajlevin/school/multimedia/projet/build",
   "command": "/usr/bin/g++   -g -o CMakeFiles/inputHelper.dir/inputHelper.cpp.o -c /home/ajlevin/school/multimedia/projet/inputHelper.cpp",
   "file": "/home/ajlevin/school/multimedia/projet/inputHelper.cpp"
 },

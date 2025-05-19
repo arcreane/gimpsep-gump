@@ -59,6 +59,22 @@ void resize(cv::Mat& current, cv::Mat& edited)
     cv::resize(current, edited, cv::Size(), fx, fy, interpolation);
 }
 
+/// @brief Flips given image either horizantally or vertically
+/// @param current current file to be edited
+/// @param edited edited output file
+void flip(cv::Mat& current, cv::Mat& edited)
+{
+    int flipMode;
+    std::vector<cv::Mat> imgs;
+    std::string modeString;
+    std::string modePrompt = "Would you like flip horizantally or vertically: ";
+    std::vector<std::string> validModes = {"HORIZANTALLY", "VERTICALLY"};
+    if (stringInputValidator(modeString, 3, modePrompt, validModes)) { return; }
+    flipMode = modeString.compare("VERTICAL") ? 1 : 0;
+
+    cv::flip(current, edited, flipMode);
+}
+
 /// @brief Lighten given file
 /// @param current current file to be edited
 /// @param edited edited output file
@@ -91,13 +107,13 @@ void stitch(cv::Mat& current, cv::Mat& edited)
     std::string modeString;
     std::string modePrompt = "Would you like to use SCAN or PANORMA stitching mode: ";
     std::vector<std::string> validModes = {"SCAN", "PANORAMA"};
-    stringInputValidator(modeString, 3, modePrompt, validModes);
+    if (stringInputValidator(modeString, 3, modePrompt, validModes)) { return; }
 
     parseStitchArgs(imgs, current);
     
     cv::Stitcher::Mode mode = modeString.compare("SCAN") ? cv::Stitcher::PANORAMA : cv::Stitcher::SCANS;
-    // cv::Ptr<cv::Stitcher> stitcher = cv::Stitcher::create(mode);
-    // cv::Stitcher::Status status = stitcher -> stitch(imgs, edited);
+    cv::Ptr<cv::Stitcher> stitcher = cv::Stitcher::create(mode);
+    cv::Stitcher::Status status = stitcher -> stitch(imgs, edited);
 
     // if (status != cv::Stitcher::OK)
     // {

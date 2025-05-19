@@ -2,6 +2,7 @@
 #define INPUT_HELPER_H
 #include <opencv2/opencv.hpp>
 #include <iostream>
+#include <sstream>
 #include <stdio.h>
 
 void stringToLower(std::string& txt);

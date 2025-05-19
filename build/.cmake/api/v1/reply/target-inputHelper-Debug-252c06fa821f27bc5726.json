@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "libtransformations.a"
+			"path" : "libinputHelper.a"
 		}
 	],
 	"backtrace" : 1,
@@ -46,9 +46,9 @@
 			]
 		}
 	],
-	"id" : "transformations::@6890427a1f51a3e7e1df",
-	"name" : "transformations",
-	"nameOnDisk" : "libtransformations.a",
+	"id" : "inputHelper::@6890427a1f51a3e7e1df",
+	"name" : "inputHelper",
+	"nameOnDisk" : "libinputHelper.a",
 	"paths" : 
 	{
 		"build" : ".",
@@ -76,12 +76,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "transformations.cpp",
+			"path" : "inputHelper.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "transformations.h",
+			"path" : "inputHelper.h",
 			"sourceGroupIndex" : 1
 		}
 	],

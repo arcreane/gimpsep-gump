@@ -127,6 +127,7 @@ Editor: /usr/local/lib/libopencv_wechat_qrcode.so.4.8.0
 Editor: /usr/local/lib/libopencv_xfeatures2d.so.4.8.0
 Editor: /usr/local/lib/libopencv_xobjdetect.so.4.8.0
 Editor: /usr/local/lib/libopencv_xphoto.so.4.8.0
+Editor: librecord.a
 Editor: libinputHelper.a
 Editor: libtransformations.a
 Editor: /usr/local/lib/libopencv_shape.so.4.8.0

@@ -130,6 +130,19 @@ Editor/fast:
 .PHONY : Editor/fast
 
 #=============================================================================
+# Target rules for targets named record
+
+# Build rule for target.
+record: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 record
+.PHONY : record
+
+# fast build rule for target.
+record/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/record.dir/build.make CMakeFiles/record.dir/build
+.PHONY : record/fast
+
+#=============================================================================
 # Target rules for targets named inputHelper
 
 # Build rule for target.
@@ -203,6 +216,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+record.o: record.cpp.o
+.PHONY : record.o
+
+# target to build an object file
+record.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/record.dir/build.make CMakeFiles/record.dir/record.cpp.o
+.PHONY : record.cpp.o
+
+record.i: record.cpp.i
+.PHONY : record.i
+
+# target to preprocess a source file
+record.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/record.dir/build.make CMakeFiles/record.dir/record.cpp.i
+.PHONY : record.cpp.i
+
+record.s: record.cpp.s
+.PHONY : record.s
+
+# target to generate assembly for a file
+record.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/record.dir/build.make CMakeFiles/record.dir/record.cpp.s
+.PHONY : record.cpp.s
+
 transformations.o: transformations.cpp.o
 .PHONY : transformations.o
 
@@ -237,6 +274,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Editor"
 	@echo "... inputHelper"
+	@echo "... record"
 	@echo "... transformations"
 	@echo "... inputHelper.o"
 	@echo "... inputHelper.i"
@@ -244,6 +282,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... record.o"
+	@echo "... record.i"
+	@echo "... record.s"
 	@echo "... transformations.o"
 	@echo "... transformations.i"
 	@echo "... transformations.s"

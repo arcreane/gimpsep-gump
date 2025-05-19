@@ -50,6 +50,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/Editor.dir/DependInfo.cmake"
+  "CMakeFiles/record.dir/DependInfo.cmake"
   "CMakeFiles/inputHelper.dir/DependInfo.cmake"
   "CMakeFiles/transformations.dir/DependInfo.cmake"
   )

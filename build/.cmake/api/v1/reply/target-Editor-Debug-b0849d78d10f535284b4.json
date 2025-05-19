@@ -31,12 +31,6 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 18,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
 				"line" : 19,
 				"parent" : 0
 			},
@@ -44,6 +38,18 @@
 				"command" : 1,
 				"file" : 0,
 				"line" : 20,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 21,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 22,
 				"parent" : 0
 			}
 		]
@@ -68,10 +74,14 @@
 	[
 		{
 			"backtrace" : 3,
-			"id" : "inputHelper::@6890427a1f51a3e7e1df"
+			"id" : "record::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 4,
+			"id" : "inputHelper::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 5,
 			"id" : "transformations::@6890427a1f51a3e7e1df"
 		}
 	],
@@ -269,11 +279,16 @@
 			},
 			{
 				"backtrace" : 3,
-				"fragment" : "libinputHelper.a",
+				"fragment" : "librecord.a",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 4,
+				"fragment" : "libinputHelper.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
 				"fragment" : "libtransformations.a",
 				"role" : "libraries"
 			},

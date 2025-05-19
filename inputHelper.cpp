@@ -173,10 +173,10 @@ int ynInputValidator(bool& inputtedBool, int retries, std::string promptString)
     return -1;
 }
 
-/// @brief 
-/// @param imgs 
-/// @param current 
-/// @return 
+/// @brief Parse file inputs for the stitch operation
+/// @param imgs list of files to be stitched
+/// @param current currently selected image
+/// @return 0 on success, -1 on failure
 int parseStitchArgs(std::vector<cv::Mat>& imgs, cv::Mat& current)
 {    
     bool useCurrent;

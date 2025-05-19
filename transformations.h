@@ -1,6 +1,7 @@
 #ifndef TRANSFORMATIONS_H
 #define TRANSFORMATIONS_H
 #include <opencv2/opencv.hpp>
+#include <opencv2/stitching.hpp>
 #include <iostream>
 #include <stdio.h>
 
@@ -9,6 +10,8 @@ void dilate(cv::Mat& current, cv::Mat& edited);
 void erode(cv::Mat& current, cv::Mat& edited);
 
 void resize(cv::Mat& current, cv::Mat& edited);
+
+void flip(cv::Mat& current, cv::Mat& edited);
 
 void lighten(cv::Mat& current, cv::Mat& edited);
 
