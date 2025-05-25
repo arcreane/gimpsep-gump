@@ -135,7 +135,7 @@ void stitch(Record& record)
     
     std::vector<cv::Mat> imgs;
     std::string modeString;
-    std::string modePrompt = "Would you like to use SCAN or PANORMA stitching mode: ";
+    std::string modePrompt = "Would you like to use SCAN or PANORAMA stitching mode: ";
     std::vector<std::string> validModes = {"SCAN", "PANORAMA"};
     if (stringInputValidator(modeString, 3, modePrompt, validModes)) { return; }
 
