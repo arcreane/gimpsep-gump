@@ -129,51 +129,12 @@ Editor/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/build
 .PHONY : Editor/fast
 
-#=============================================================================
-# Target rules for targets named record
-
-# Build rule for target.
-record: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 record
-.PHONY : record
-
-# fast build rule for target.
-record/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/record.dir/build.make CMakeFiles/record.dir/build
-.PHONY : record/fast
-
-#=============================================================================
-# Target rules for targets named inputHelper
-
-# Build rule for target.
-inputHelper: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 inputHelper
-.PHONY : inputHelper
-
-# fast build rule for target.
-inputHelper/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputHelper.dir/build.make CMakeFiles/inputHelper.dir/build
-.PHONY : inputHelper/fast
-
-#=============================================================================
-# Target rules for targets named transformations
-
-# Build rule for target.
-transformations: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 transformations
-.PHONY : transformations
-
-# fast build rule for target.
-transformations/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/transformations.dir/build.make CMakeFiles/transformations.dir/build
-.PHONY : transformations/fast
-
 inputHelper.o: inputHelper.cpp.o
 .PHONY : inputHelper.o
 
 # target to build an object file
 inputHelper.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputHelper.dir/build.make CMakeFiles/inputHelper.dir/inputHelper.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/inputHelper.cpp.o
 .PHONY : inputHelper.cpp.o
 
 inputHelper.i: inputHelper.cpp.i
@@ -181,7 +142,7 @@ inputHelper.i: inputHelper.cpp.i
 
 # target to preprocess a source file
 inputHelper.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputHelper.dir/build.make CMakeFiles/inputHelper.dir/inputHelper.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/inputHelper.cpp.i
 .PHONY : inputHelper.cpp.i
 
 inputHelper.s: inputHelper.cpp.s
@@ -189,7 +150,7 @@ inputHelper.s: inputHelper.cpp.s
 
 # target to generate assembly for a file
 inputHelper.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/inputHelper.dir/build.make CMakeFiles/inputHelper.dir/inputHelper.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/inputHelper.cpp.s
 .PHONY : inputHelper.cpp.s
 
 main.o: main.cpp.o
@@ -221,7 +182,7 @@ record.o: record.cpp.o
 
 # target to build an object file
 record.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/record.dir/build.make CMakeFiles/record.dir/record.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/record.cpp.o
 .PHONY : record.cpp.o
 
 record.i: record.cpp.i
@@ -229,7 +190,7 @@ record.i: record.cpp.i
 
 # target to preprocess a source file
 record.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/record.dir/build.make CMakeFiles/record.dir/record.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/record.cpp.i
 .PHONY : record.cpp.i
 
 record.s: record.cpp.s
@@ -237,7 +198,7 @@ record.s: record.cpp.s
 
 # target to generate assembly for a file
 record.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/record.dir/build.make CMakeFiles/record.dir/record.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/record.cpp.s
 .PHONY : record.cpp.s
 
 transformations.o: transformations.cpp.o
@@ -245,7 +206,7 @@ transformations.o: transformations.cpp.o
 
 # target to build an object file
 transformations.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/transformations.dir/build.make CMakeFiles/transformations.dir/transformations.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/transformations.cpp.o
 .PHONY : transformations.cpp.o
 
 transformations.i: transformations.cpp.i
@@ -253,7 +214,7 @@ transformations.i: transformations.cpp.i
 
 # target to preprocess a source file
 transformations.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/transformations.dir/build.make CMakeFiles/transformations.dir/transformations.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/transformations.cpp.i
 .PHONY : transformations.cpp.i
 
 transformations.s: transformations.cpp.s
@@ -261,7 +222,7 @@ transformations.s: transformations.cpp.s
 
 # target to generate assembly for a file
 transformations.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/transformations.dir/build.make CMakeFiles/transformations.dir/transformations.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/transformations.cpp.s
 .PHONY : transformations.cpp.s
 
 # Help Target
@@ -273,9 +234,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Editor"
-	@echo "... inputHelper"
-	@echo "... record"
-	@echo "... transformations"
 	@echo "... inputHelper.o"
 	@echo "... inputHelper.i"
 	@echo "... inputHelper.s"

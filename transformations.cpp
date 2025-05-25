@@ -4,12 +4,15 @@
 #include <stdio.h>
 #include <algorithm>
 #include "inputHelper.h"
+#include "record.h"
 
 /// @brief Dilate given file
-/// @param current current file to be edited
-/// @param edited edited output file
-void dilate(cv::Mat& current, cv::Mat& edited)
+/// @param record record of recent images and their operations
+void dilate(Record& record)
 {
+    cv::Mat current = record.getCurrent();
+    cv::Mat edited = cv::Mat();
+    
     int iterations = 1;
     std::string promptIterString = "Please enter the desired iteration count [0-100]: ";
     std::pair<int, int> validIterRange (0, 100);
@@ -22,13 +25,17 @@ void dilate(cv::Mat& current, cv::Mat& edited)
     
     cv::Mat kernel = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(kernelDims, kernelDims), cv::Point(-1, -1));
     cv::dilate(current, edited, kernel, cv::Point(-1, -1), iterations, cv::BORDER_CONSTANT, cv::morphologyDefaultBorderValue());
+
+    record.push(edited, "DILATE");
 }
 
 /// @brief Erode given file
-/// @param current current file to be edited
-/// @param edited edited output file
-void erode(cv::Mat& current, cv::Mat& edited)
+/// @param record record of recent images and their operations
+void erode(Record& record)
 {
+    cv::Mat current = record.getCurrent();
+    cv::Mat edited = cv::Mat();
+    
     int iterations = 1;
     std::string promptIterString = "Please enter the desired iteration count [0-100]: ";
     std::pair<int, int> validIterRange (0, 100);
@@ -41,13 +48,17 @@ void erode(cv::Mat& current, cv::Mat& edited)
     
     cv::Mat kernel = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(kernelDims, kernelDims), cv::Point(-1, -1));
     cv::erode(current, edited, kernel, cv::Point(-1, -1), iterations, cv::BORDER_CONSTANT, cv::morphologyDefaultBorderValue());
+
+    record.push(edited, "ERODE");
 }
 
 /// @brief Resize given file
-/// @param current current file to be edited
-/// @param edited edited output file
-void resize(cv::Mat& current, cv::Mat& edited)
+/// @param record record of recent images and their operations
+void resize(Record& record)
 {
+    cv::Mat current = record.getCurrent();
+    cv::Mat edited = cv::Mat();
+    
     double factor;
     std::string promptString = "Please enter the desired scaling percentage [0-1000%]: ";
     std::pair<double, double> validRange (0.0, 1000.0);
@@ -57,13 +68,17 @@ void resize(cv::Mat& current, cv::Mat& edited)
     int interpolation = (factor >= 100) ? cv::INTER_LINEAR : cv::INTER_AREA;
 
     cv::resize(current, edited, cv::Size(), fx, fy, interpolation);
+
+    record.push(edited, "RESIZE");
 }
 
 /// @brief Flips given image either horizantally or vertically
-/// @param current current file to be edited
-/// @param edited edited output file
-void flip(cv::Mat& current, cv::Mat& edited)
+/// @param record record of recent images and their operations
+void flip(Record& record)
 {
+    cv::Mat current = record.getCurrent();
+    cv::Mat edited = cv::Mat();
+    
     int flipMode;
     std::vector<cv::Mat> imgs;
     std::string modeString;
@@ -73,36 +88,51 @@ void flip(cv::Mat& current, cv::Mat& edited)
     flipMode = modeString.compare("VERTICAL") ? 1 : 0;
 
     cv::flip(current, edited, flipMode);
+
+    record.push(edited, "FLIP");
 }
 
 /// @brief Lighten given file
-/// @param current current file to be edited
-/// @param edited edited output file
-void lighten(cv::Mat& current, cv::Mat& edited)
+/// @param record record of recent images and their operations
+void lighten(Record& record)
 {
+    cv::Mat current = record.getCurrent();
+    cv::Mat edited = cv::Mat();
+    
     int beta;
     std::string promptString = "Please enter the lightening amount [0-255]: ";
     std::pair<int, int> validRange (0, 255);
     if (intInputValidator(beta, 3, promptString, validRange)) { return; }
 
     current.convertTo(edited, -1, 1, beta);
+
+    record.push(edited, "LIGHTEN");
 }
 
 /// @brief Darken given file
-/// @param current current file to be edited
-/// @param edited edited output file
-void darken(cv::Mat& current, cv::Mat& edited)
+/// @param record record of recent images and their operations
+void darken(Record& record)
 {
+    cv::Mat current = record.getCurrent();
+    cv::Mat edited = cv::Mat();
+    
     int beta;
     std::string promptString = "Please enter the darkening amount [0-255]: ";
     std::pair<int, int> validRange (0, 255);
     if (intInputValidator(beta, 3, promptString, validRange)) { return; }
 
     current.convertTo(edited, -1, 1, -beta);
+
+    record.push(edited, "DARKEN");
 }
 
-void stitch(cv::Mat& current, cv::Mat& edited)
+/// @brief stitches together a series of images in either SCAN or PANORAMA modes
+/// @param record record of recent images and their operations
+void stitch(Record& record)
 {
+    cv::Mat current = record.getCurrent();
+    cv::Mat edited = cv::Mat();
+    
     std::vector<cv::Mat> imgs;
     std::string modeString;
     std::string modePrompt = "Would you like to use SCAN or PANORMA stitching mode: ";
@@ -115,18 +145,22 @@ void stitch(cv::Mat& current, cv::Mat& edited)
     cv::Ptr<cv::Stitcher> stitcher = cv::Stitcher::create(mode);
     cv::Stitcher::Status status = stitcher -> stitch(imgs, edited);
 
-    // if (status != cv::Stitcher::OK)
-    // {
-    //     std::cout << "Can't stitch images, error code = " << int(status) << std::endl;
-    //     return;
-    // }
+    if (status != cv::Stitcher::OK)
+    {
+        std::cout << "Can't stitch images, error code = " << int(status) << std::endl;
+        return;
+    }
+
+    record.push(edited, "STITCH");
 }
 
 /// @brief Utilize Canny algorithm to detect file edges
-/// @param current current file to be edited
-/// @param edited edited output file
-void cannyEdgeDetection(cv::Mat& current, cv::Mat& edited)
+/// @param record record of recent images and their operations
+void cannyEdgeDetection(Record& record)
 {
+    cv::Mat current = record.getCurrent();
+    cv::Mat edited = cv::Mat();
+    
     double lowerThreshold = 0;
     std::string promptLTString = "Please enter the lower threshold: ";
     std::pair<double, double> validLTRange (0.0, DBL_MAX);
@@ -143,16 +177,17 @@ void cannyEdgeDetection(cv::Mat& current, cv::Mat& edited)
     if (intInputValidator(kernelSize, 3, promptKernelString, validKernelRange)) { return; }
 
     cv::Canny(current, edited, lowerThreshold, upperThreshold, kernelSize);
+
+    record.push(edited, "CANNY");
 }
 
 /// @brief Removes all current unsaved edits and restores the original file
-/// @param source source image to be restored
-/// @param edited edited file to be overwritten
-void restore(cv::Mat& source, cv::Mat& edited)
+/// @param record record of recent images and their operations
+void restore(Record& record)
 {
     std::string userInput;
     bool restore;
-    std::string promptString = "Would you like to continue? [y/n]: ";
+    std::string promptString = "Would you like to continue with restoration? [y/n]: ";
 
     printf("Restoring the image will wipe all current edits.\n");
     printf("There is no way to reverse this operation.\n");
@@ -160,23 +195,29 @@ void restore(cv::Mat& source, cv::Mat& edited)
 
     if (restore)
     {
-        edited = source;
+        cv::Mat source = record.getSource();
+        record.clear();
+        record.push(source, "ORIGINAL");
     }
 }
 
 /// @brief Save the current edited file into or onto a file
-/// @param edited edited file to be saved
+/// @param record record of recent images and their operations
 /// @param active boolean set for to determine program continuation
-void saveFile(cv::Mat& edited, bool& active)
+void saveFile(Record& record, bool& active)
 {
+    cv::Mat current = record.getCurrent();
+    
     std::string outputName;
     std::string outPromptString = "Please enter the name of the output file (extension included):\n";
     std::vector<std::string> validInputs = {};
     if (stringInputValidator(outputName, 3, outPromptString, validInputs)) { return; }
-    imwrite(outputName, edited);
+    imwrite(outputName, current);
 
     bool continueOps;
     std::string contPromptString = "Would you like to continue editing operations [y/n]: ";
     if (ynInputValidator(continueOps, 3, contPromptString)) { return; }
     active = continueOps;
+
+    record.push(current, "SAVE");
 }

@@ -185,7 +185,7 @@ int parseStitchArgs(std::vector<cv::Mat>& imgs, cv::Mat& current)
     if (useCurrent) { imgs.push_back(current); }
 
     std::string inputtedString;
-    std::string imgPromptString = "Please enter all files you wish to stitch (seperated by spaces)";
+    std::string imgPromptString = "Please enter all files you wish to stitch (seperated by spaces): ";
     std::vector<std::string> validInputs = {};
     stringInputValidator(inputtedString, 1, imgPromptString, validInputs);
 

@@ -8,49 +8,9 @@
 #include "transformations.h"
 #include "inputHelper.h"
 #include "record.h"
+#include "operations.h"
 
-#define stringify( name ) # name
-
-
-/// @brief file type to be tranformed
-enum File {
-    IMAGE,
-    IMAGES,
-    DIRECTORY,
-    VIDEO
-};
-
-/// @brief requested operation type
-enum Operation {
-    RESTORE,
-    UNDO,
-    REDO,
-    DILATE,
-    ERODE,
-    RESIZE,
-    FLIP,
-    LIGHTEN,
-    DARKEN,
-    STITCH,
-    CANNY,
-    SAVE
-};
-
-/// @brief mapping of string to operation type
-const std::unordered_map<std::string, Operation> OP_TABLE = { 
-    {"RESTORE", RESTORE},
-    {"UNDO", UNDO},
-    {"REDO", REDO},
-    {"DILATE", DILATE},
-    {"ERODE", ERODE},
-    {"RESIZE", RESIZE},
-    {"FLIP", FLIP},
-    {"LIGHTEN", LIGHTEN},
-    {"DARKEN", DARKEN},
-    {"STITCH", STITCH},
-    {"CANNY", CANNY},
-    {"SAVE", SAVE}
-};
+#define RECORD_SIZE 100
 
 /// @brief load file for transformation
 /// @param source source to have the file loaded into
@@ -64,15 +24,14 @@ int loadFile(cv::Mat& source)
         std::string fileName;
         std::cin >> fileName;
         clearInput();
-        source = cv::imread(cv::samples::findFile(fileName), cv::IMREAD_COLOR);
-        source.convertTo(source, CV_8U);
+        source = cv::imread(cv::samples::findFile(fileName, false, true), cv::IMREAD_COLOR);
 
-        if (!source.data) {
+        if (source.empty()) {
             retryCount--;
             if (retryCount) {
-                printf("No image data found. Please enter a valid image file.\n");
+                std::cout << "No image data found for: '" << fileName << "'. Please enter a valid image file.\n" << std::endl;
             } else {
-                printf("No image data found: Closing application.\n");
+                std::cout << "No image data found for: '" << fileName << "'. Closing application.\n" << std::endl;
                 return -1;
             }
         } else {
@@ -83,9 +42,34 @@ int loadFile(cv::Mat& source)
     return 0;
 }
 
+/// @brief Attempts to exit the program, checking for an updated save
+/// @param record record of operations and data
+/// @param active bool determining program continuation post operation
+void attemptExit(Record record, bool& active)
+{
+    std::string mro = record.mostRecentOperation();
+    if (mro.compare("SAVE") && mro.compare("ORIGINAL")) {
+        printf("You have made changes since your last save.\n");
+        std::string inputtedString;
+        std::string promptString = "Would you like to [Cancel, Quit, Save]: ";
+        std::vector<std::string> validInputs = {"CANCEL", "QUIT", "SAVE"};
+        if (stringInputValidator(inputtedString, 3, promptString, validInputs)) { return; } 
+        stringToUpper(inputtedString);
+
+        if (!inputtedString.compare("SAVE")) {
+            saveFile(record, active);
+            return;
+        } else if (!inputtedString.compare("CANCEL")) {
+            active = true;
+            return;
+        }
+    }
+    active = false;
+}
+
 int main(int argc, char* argv[])
 {
-    Record record(30);
+    Record record(RECORD_SIZE);
     cv::Mat source, current, edited;
     // Videocapture cap;
     Operation op = RESTORE;
@@ -93,91 +77,75 @@ int main(int argc, char* argv[])
     
     bool active = true;
     bool updateRecord = true;
-    std::string currentOp = "ORIGINAL";
     std::string opInput;
-    std::string promptString = "Please enter your desired editing operation:\n\
-        [Dilate, Erode, Resize, Flip, Lighten, Darken, Stitch, Canny (for Canny Edge Detection)]\n\
-        or for a file operation, enter one of: [Restore, Undo, Redo, Save]\n";
-    std::vector<std::string> validInputs = { 
-        "RESTORE",
-        "UNDO",
-        "REDO",
-        "SAVE",
-        "DILATE", 
-        "ERODE", 
-        "RESIZE", 
-        "FLIP",
-        "LIGHTEN", 
-        "DARKEN", 
-        "STITCH", 
-        "CANNY"
-    };
+    std::string promptString = "Please enter your desired operation:\n\
+        Editing : [Dilate, Erode, Resize, Flip, Lighten, Darken, Stitch, Canny (for Canny Edge Detection)]\n\
+        File    : [History, Restore, Undo, Redo, Save, Exit]\n";
+    std::vector<std::string> validInputs;
+    for (auto kv : OP_TABLE) { validInputs.push_back(kv.first); }
+
 
     if (loadFile(source) == -1) {
         return -1;
     } else {
         current = source;  
     }
-    
-    record.push(current, "ORIGINAL");
-    while (active) {
-        if (updateRecord) { record.push(current, currentOp); }
-        updateRecord = true;
-        std::cout << record.toString() << std::endl;
 
+    record.setSource(source);
+    record.push(current, "ORIGINAL");
+    while (active) {        
         if (stringInputValidator(opInput, 3, promptString, validInputs)) {
             return -1;
         }
         stringToUpper(opInput);
-        currentOp = opInput;
         
         switch(OP_TABLE.at(opInput)) {
             case DILATE:
-                dilate(current, edited);
+                dilate(record);
                 break;
             case ERODE:
-                erode(current, edited);
+                erode(record);
                 break;
             case RESIZE:
-                resize(current, edited);
+                resize(record);
                 break;
             case FLIP:
-                flip(current, edited);
+                flip(record);
                 break;
             case LIGHTEN:
-                lighten(current, edited);
+                lighten(record);
                 break;
             case DARKEN:
-                darken(current, edited);
+                darken(record);
                 break;
             case STITCH:
-                stitch(current, edited);
+                stitch(record);
                 break;
             case CANNY:
-                cannyEdgeDetection(current, edited);
+                cannyEdgeDetection(record);
+                break;
+            case HISTORY:
+                std::cout << record.toString() << std::endl;
                 break;
             case RESTORE:
-                restore(source, edited);
+                restore(record);
                 break;
             case UNDO:
                 current = record.getLast().clone();
-                updateRecord = false;
                 break;
             case REDO:
                 current = record.getNext().clone();
-                updateRecord = false;
                 break;
             case SAVE:
                 active = false;
-                saveFile(edited, active);
+                saveFile(record, active);
+                break;
+            case EXIT:
+                attemptExit(record, active);
                 break;
             default:
                 printf("-- Invalid operation request. --\n");
                 break;
-        }
-        if (updateRecord) { 
-            current = edited;
-            record.push(current, currentOp); 
         }
     }
 

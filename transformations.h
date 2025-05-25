@@ -4,25 +4,27 @@
 #include <opencv2/stitching.hpp>
 #include <iostream>
 #include <stdio.h>
+#include "inputHelper.h"
+#include "record.h"
 
-void dilate(cv::Mat& current, cv::Mat& edited);
+void dilate(Record& record);
 
-void erode(cv::Mat& current, cv::Mat& edited);
+void erode(Record& record);
 
-void resize(cv::Mat& current, cv::Mat& edited);
+void resize(Record& record);
 
-void flip(cv::Mat& current, cv::Mat& edited);
+void flip(Record& record);
 
-void lighten(cv::Mat& current, cv::Mat& edited);
+void lighten(Record& record);
 
-void darken(cv::Mat& current, cv::Mat& edited);
+void darken(Record& record);
 
-void stitch(cv::Mat& current, cv::Mat& edited);
+void stitch(Record& record);
 
-void cannyEdgeDetection(cv::Mat& current, cv::Mat& edited);
+void cannyEdgeDetection(Record& record);
 
-void restore(cv::Mat& source, cv::Mat& edited);
+void restore(Record& record);
 
-void saveFile(cv::Mat& edited, bool& active);
+void saveFile(Record& record, bool& active);
 
 #endif /* TRANSFORMATIONS_H */

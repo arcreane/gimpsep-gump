@@ -1,0 +1,2 @@
+/usr/bin/ar qc libgump.a CMakeFiles/gump.dir/record.cpp.o CMakeFiles/gump.dir/inputHelper.cpp.o CMakeFiles/gump.dir/transformations.cpp.o
+/usr/bin/ranlib libgump.a

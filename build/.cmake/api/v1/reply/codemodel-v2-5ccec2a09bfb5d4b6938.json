@@ -15,10 +15,7 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0,
-						1,
-						2,
-						3
+						0
 					]
 				}
 			],
@@ -33,10 +30,7 @@
 					"name" : "Editor",
 					"targetIndexes" : 
 					[
-						0,
-						1,
-						2,
-						3
+						0
 					]
 				}
 			],
@@ -45,29 +39,8 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Editor::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Editor-Debug-b0849d78d10f535284b4.json",
+					"jsonFile" : "target-Editor-Debug-b10abe5beb65f31cd3a0.json",
 					"name" : "Editor",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
-					"id" : "inputHelper::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-inputHelper-Debug-252c06fa821f27bc5726.json",
-					"name" : "inputHelper",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
-					"id" : "record::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-record-Debug-86bad7d7f2093f6943d0.json",
-					"name" : "record",
-					"projectIndex" : 0
-				},
-				{
-					"directoryIndex" : 0,
-					"id" : "transformations::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-transformations-Debug-3e85bf18fd96b511c37e.json",
-					"name" : "transformations",
 					"projectIndex" : 0
 				}
 			]
