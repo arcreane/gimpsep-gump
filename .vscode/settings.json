@@ -61,6 +61,8 @@
         "numeric": "cpp",
         "random": "cpp",
         "fstream": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "cfenv": "cpp",
+        "typeindex": "cpp"
     }
 }

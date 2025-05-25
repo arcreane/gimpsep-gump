@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
     bool updateRecord = true;
     std::string opInput;
     std::string promptString = "Please enter your desired operation:\n\
-        Editing : [Dilate, Erode, Resize, Flip, Lighten, Darken, Stitch, Canny (for Canny Edge Detection)]\n\
+        Editing : [Dilate, Erode, Resize, Flip, Lighten, Darken, Stitch, Canny (for Edge Detection), Face (for face detection)]\n\
         File    : [History, Restore, Undo, Redo, Save, Exit]\n";
     std::vector<std::string> validInputs;
     for (auto kv : OP_TABLE) { validInputs.push_back(kv.first); }
@@ -123,6 +123,9 @@ int main(int argc, char* argv[])
                 break;
             case CANNY:
                 cannyEdgeDetection(record);
+                break;
+            case FACE:
+                faceDetection(record);
                 break;
             case HISTORY:
                 std::cout << record.toString() << std::endl;

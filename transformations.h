@@ -23,6 +23,8 @@ void stitch(Record& record);
 
 void cannyEdgeDetection(Record& record);
 
+void faceDetection(Record& record);
+
 void restore(Record& record);
 
 void saveFile(Record& record, bool& active);

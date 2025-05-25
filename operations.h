@@ -25,6 +25,7 @@ enum Operation {
     DARKEN,
     STITCH,
     CANNY,
+    FACE,
     SAVE,
     EXIT
 };
@@ -43,6 +44,7 @@ const std::unordered_map<std::string, Operation> OP_TABLE = {
     {"DARKEN", DARKEN},
     {"STITCH", STITCH},
     {"CANNY", CANNY},
+    {"FACE", FACE},
     {"SAVE", SAVE},
     {"EXIT", EXIT}
 };

@@ -1,5 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/stitching.hpp>
+#include <opencv2/objdetect.hpp>
 #include <iostream>
 #include <stdio.h>
 #include <algorithm>
@@ -179,6 +180,32 @@ void cannyEdgeDetection(Record& record)
     cv::Canny(current, edited, lowerThreshold, upperThreshold, kernelSize);
 
     record.push(edited, "CANNY");
+}
+
+/// @brief Uses Yunet model to identify faces in an image
+/// @param record record of recent images and their operations
+void faceDetection(Record& record)
+{
+    cv::Mat current = record.getCurrent();
+    cv::Mat edited = record.getCurrent();
+    cv::Mat faces = cv::Mat();
+    
+    std::string modelPath = "face_detection_yunet_2023mar.onnx";
+    cv::Ptr<cv::FaceDetectorYN> detector = cv::FaceDetectorYN::create(modelPath, "", current.size());
+    
+    detector -> setInputSize(current.size());
+    detector -> detect(current, faces);
+
+    for (int i = 0; i < faces.rows; i++) {
+        cv::Rect box( \
+            faces.at<float>(i, 0), \
+            faces.at<float>(i, 1), \
+            faces.at<float>(i, 2), \
+            faces.at<float>(i, 3));
+        cv::rectangle(edited, box, cv::Scalar(10, 20, 255), 2);
+    }
+
+    record.push(edited, "FACE");
 }
 
 /// @brief Removes all current unsaved edits and restores the original file
