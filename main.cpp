@@ -150,6 +150,11 @@ int main(int argc, char* argv[])
                 printf("-- Invalid operation request. --\n");
                 break;
         }
+
+        cv::namedWindow("Editor Display", cv::WINDOW_AUTOSIZE);
+        cv::imshow("Editor Display", record.getCurrent());
+        cv::waitKey(0);
+        cv::destroyWindow("Editor Display");
     }
 
     // cap.close();
