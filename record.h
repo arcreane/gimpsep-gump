@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <stdio.h>
 
+/// @brief Record class to store operations sequences and handle sequence manipulation
 class Record {
     public:
         int maxSize;
