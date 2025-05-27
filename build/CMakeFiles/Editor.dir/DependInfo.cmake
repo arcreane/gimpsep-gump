@@ -10,8 +10,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/ajlevin/school/multimedia/projet/inputHelper.cpp" "CMakeFiles/Editor.dir/inputHelper.cpp.o" "gcc" "CMakeFiles/Editor.dir/inputHelper.cpp.o.d"
   "/home/ajlevin/school/multimedia/projet/main.cpp" "CMakeFiles/Editor.dir/main.cpp.o" "gcc" "CMakeFiles/Editor.dir/main.cpp.o.d"
+  "/home/ajlevin/school/multimedia/projet/operations.cpp" "CMakeFiles/Editor.dir/operations.cpp.o" "gcc" "CMakeFiles/Editor.dir/operations.cpp.o.d"
   "/home/ajlevin/school/multimedia/projet/record.cpp" "CMakeFiles/Editor.dir/record.cpp.o" "gcc" "CMakeFiles/Editor.dir/record.cpp.o.d"
-  "/home/ajlevin/school/multimedia/projet/transformations.cpp" "CMakeFiles/Editor.dir/transformations.cpp.o" "gcc" "CMakeFiles/Editor.dir/transformations.cpp.o.d"
   )
 
 # Targets to which this target links.

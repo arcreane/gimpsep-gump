@@ -1,5 +1,5 @@
-CMakeFiles/Editor.dir/main.cpp.o: \
- /home/ajlevin/school/multimedia/projet/main.cpp \
+CMakeFiles/Editor.dir/operations.cpp.o: \
+ /home/ajlevin/school/multimedia/projet/operations.cpp \
  /usr/include/stdc-predef.h /usr/local/include/opencv4/opencv2/opencv.hpp \
  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
  /usr/local/include/opencv4/opencv2/core.hpp \
@@ -359,5 +359,4 @@ CMakeFiles/Editor.dir/main.cpp.o: \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
  /home/ajlevin/school/multimedia/projet/operations.h \
  /home/ajlevin/school/multimedia/projet/inputHelper.h \
- /home/ajlevin/school/multimedia/projet/record.h \
- /home/ajlevin/school/multimedia/projet/inputs.h
+ /home/ajlevin/school/multimedia/projet/record.h

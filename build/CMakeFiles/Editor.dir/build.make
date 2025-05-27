@@ -111,26 +111,26 @@ CMakeFiles/Editor.dir/inputHelper.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Editor.dir/inputHelper.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ajlevin/school/multimedia/projet/inputHelper.cpp -o CMakeFiles/Editor.dir/inputHelper.cpp.s
 
-CMakeFiles/Editor.dir/transformations.cpp.o: CMakeFiles/Editor.dir/flags.make
-CMakeFiles/Editor.dir/transformations.cpp.o: ../transformations.cpp
-CMakeFiles/Editor.dir/transformations.cpp.o: CMakeFiles/Editor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ajlevin/school/multimedia/projet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Editor.dir/transformations.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Editor.dir/transformations.cpp.o -MF CMakeFiles/Editor.dir/transformations.cpp.o.d -o CMakeFiles/Editor.dir/transformations.cpp.o -c /home/ajlevin/school/multimedia/projet/transformations.cpp
+CMakeFiles/Editor.dir/operations.cpp.o: CMakeFiles/Editor.dir/flags.make
+CMakeFiles/Editor.dir/operations.cpp.o: ../operations.cpp
+CMakeFiles/Editor.dir/operations.cpp.o: CMakeFiles/Editor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ajlevin/school/multimedia/projet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Editor.dir/operations.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Editor.dir/operations.cpp.o -MF CMakeFiles/Editor.dir/operations.cpp.o.d -o CMakeFiles/Editor.dir/operations.cpp.o -c /home/ajlevin/school/multimedia/projet/operations.cpp
 
-CMakeFiles/Editor.dir/transformations.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Editor.dir/transformations.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ajlevin/school/multimedia/projet/transformations.cpp > CMakeFiles/Editor.dir/transformations.cpp.i
+CMakeFiles/Editor.dir/operations.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Editor.dir/operations.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ajlevin/school/multimedia/projet/operations.cpp > CMakeFiles/Editor.dir/operations.cpp.i
 
-CMakeFiles/Editor.dir/transformations.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Editor.dir/transformations.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ajlevin/school/multimedia/projet/transformations.cpp -o CMakeFiles/Editor.dir/transformations.cpp.s
+CMakeFiles/Editor.dir/operations.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Editor.dir/operations.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ajlevin/school/multimedia/projet/operations.cpp -o CMakeFiles/Editor.dir/operations.cpp.s
 
 # Object files for target Editor
 Editor_OBJECTS = \
 "CMakeFiles/Editor.dir/main.cpp.o" \
 "CMakeFiles/Editor.dir/record.cpp.o" \
 "CMakeFiles/Editor.dir/inputHelper.cpp.o" \
-"CMakeFiles/Editor.dir/transformations.cpp.o"
+"CMakeFiles/Editor.dir/operations.cpp.o"
 
 # External object files for target Editor
 Editor_EXTERNAL_OBJECTS =
@@ -138,7 +138,7 @@ Editor_EXTERNAL_OBJECTS =
 Editor: CMakeFiles/Editor.dir/main.cpp.o
 Editor: CMakeFiles/Editor.dir/record.cpp.o
 Editor: CMakeFiles/Editor.dir/inputHelper.cpp.o
-Editor: CMakeFiles/Editor.dir/transformations.cpp.o
+Editor: CMakeFiles/Editor.dir/operations.cpp.o
 Editor: CMakeFiles/Editor.dir/build.make
 Editor: /usr/local/lib/libopencv_gapi.so.4.8.0
 Editor: /usr/local/lib/libopencv_stitching.so.4.8.0

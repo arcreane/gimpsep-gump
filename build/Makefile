@@ -177,6 +177,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+operations.o: operations.cpp.o
+.PHONY : operations.o
+
+# target to build an object file
+operations.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/operations.cpp.o
+.PHONY : operations.cpp.o
+
+operations.i: operations.cpp.i
+.PHONY : operations.i
+
+# target to preprocess a source file
+operations.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/operations.cpp.i
+.PHONY : operations.cpp.i
+
+operations.s: operations.cpp.s
+.PHONY : operations.s
+
+# target to generate assembly for a file
+operations.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/operations.cpp.s
+.PHONY : operations.cpp.s
+
 record.o: record.cpp.o
 .PHONY : record.o
 
@@ -201,30 +225,6 @@ record.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/record.cpp.s
 .PHONY : record.cpp.s
 
-transformations.o: transformations.cpp.o
-.PHONY : transformations.o
-
-# target to build an object file
-transformations.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/transformations.cpp.o
-.PHONY : transformations.cpp.o
-
-transformations.i: transformations.cpp.i
-.PHONY : transformations.i
-
-# target to preprocess a source file
-transformations.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/transformations.cpp.i
-.PHONY : transformations.cpp.i
-
-transformations.s: transformations.cpp.s
-.PHONY : transformations.s
-
-# target to generate assembly for a file
-transformations.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Editor.dir/build.make CMakeFiles/Editor.dir/transformations.cpp.s
-.PHONY : transformations.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -240,12 +240,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... operations.o"
+	@echo "... operations.i"
+	@echo "... operations.s"
 	@echo "... record.o"
 	@echo "... record.i"
 	@echo "... record.s"
-	@echo "... transformations.o"
-	@echo "... transformations.i"
-	@echo "... transformations.s"
 .PHONY : help
 
 

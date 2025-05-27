@@ -357,5 +357,6 @@ CMakeFiles/Editor.dir/transformations.cpp.o: \
  /usr/local/include/opencv4/opencv2/video.hpp \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
+ /home/ajlevin/school/multimedia/projet/transformations.h \
  /home/ajlevin/school/multimedia/projet/inputHelper.h \
  /home/ajlevin/school/multimedia/projet/record.h

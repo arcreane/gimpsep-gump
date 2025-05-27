@@ -16,7 +16,7 @@
 },
 {
   "directory": "/home/ajlevin/school/multimedia/projet/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/Editor.dir/transformations.cpp.o -c /home/ajlevin/school/multimedia/projet/transformations.cpp",
-  "file": "/home/ajlevin/school/multimedia/projet/transformations.cpp"
+  "command": "/usr/bin/g++   -g -o CMakeFiles/Editor.dir/operations.cpp.o -c /home/ajlevin/school/multimedia/projet/operations.cpp",
+  "file": "/home/ajlevin/school/multimedia/projet/operations.cpp"
 }
 ]

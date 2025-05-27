@@ -25,10 +25,10 @@ void Record::push(cv::Mat& file, std::string op)
         opRecord.erase(opRecord.begin());
     }
 
-    // while (record.size() - 1 != curIndex) {
-    //     record.erase();
-    //     opRecord.erase();
-    // }
+    for (int i = record.size(); i --> curIndex + 1;) {
+        record.erase(record.begin() + i);
+        opRecord.erase(opRecord.begin() + i);
+    }
     
     record.push_back(file.clone());
     opRecord.push_back(op);

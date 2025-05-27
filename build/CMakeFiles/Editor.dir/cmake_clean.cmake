@@ -3,10 +3,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/Editor.dir/inputHelper.cpp.o.d"
   "CMakeFiles/Editor.dir/main.cpp.o"
   "CMakeFiles/Editor.dir/main.cpp.o.d"
+  "CMakeFiles/Editor.dir/operations.cpp.o"
+  "CMakeFiles/Editor.dir/operations.cpp.o.d"
   "CMakeFiles/Editor.dir/record.cpp.o"
   "CMakeFiles/Editor.dir/record.cpp.o.d"
-  "CMakeFiles/Editor.dir/transformations.cpp.o"
-  "CMakeFiles/Editor.dir/transformations.cpp.o.d"
   "Editor"
   "Editor.pdb"
 )

@@ -5,10 +5,10 @@
 #include <cctype>
 #include <algorithm>
 #include <stdio.h>
-#include "transformations.h"
+#include "operations.h"
 #include "inputHelper.h"
 #include "record.h"
-#include "operations.h"
+#include "inputs.h"
 
 #define RECORD_SIZE 100
 
@@ -42,37 +42,11 @@ int loadFile(cv::Mat& source)
     return 0;
 }
 
-/// @brief Attempts to exit the program, checking for an updated save
-/// @param record record of operations and data
-/// @param active bool determining program continuation post operation
-void attemptExit(Record record, bool& active)
-{
-    std::string mro = record.mostRecentOperation();
-    if (mro.compare("SAVE") && mro.compare("ORIGINAL")) {
-        printf("You have made changes since your last save.\n");
-        std::string inputtedString;
-        std::string promptString = "Would you like to [Cancel, Quit, Save]: ";
-        std::vector<std::string> validInputs = {"CANCEL", "QUIT", "SAVE"};
-        if (stringInputValidator(inputtedString, 3, promptString, validInputs)) { return; } 
-        stringToUpper(inputtedString);
-
-        if (!inputtedString.compare("SAVE")) {
-            saveFile(record, active);
-            return;
-        } else if (!inputtedString.compare("CANCEL")) {
-            active = true;
-            return;
-        }
-    }
-    active = false;
-}
-
 int main(int argc, char* argv[])
 {
     Record record(RECORD_SIZE);
-    cv::Mat source, current, edited;
+    cv::Mat source;
     // Videocapture cap;
-    Operation op = RESTORE;
     File f;
     
     bool active = true;
@@ -84,77 +58,43 @@ int main(int argc, char* argv[])
     std::vector<std::string> validInputs;
     for (auto kv : OP_TABLE) { validInputs.push_back(kv.first); }
 
-
     if (loadFile(source) == -1) {
         return -1;
     } else {
-        current = source;  
+        source;  
     }
 
     record.setSource(source);
-    record.push(current, "ORIGINAL");
+    record.push(source, "ORIGINAL");
+    
     while (active) {        
         if (stringInputValidator(opInput, 3, promptString, validInputs)) {
             return -1;
         }
         stringToUpper(opInput);
         
-        switch(OP_TABLE.at(opInput)) {
-            case DILATE:
-                dilate(record);
+        int opStatus = OP_TABLE.at(opInput) -> operate(record);
+        switch(opStatus){
+            case Operation::OP_FAILURE:
+                std::cout << "Operation failed: " << opInput << std::endl;
                 break;
-            case ERODE:
-                erode(record);
+            case Operation::OP_SUCCESS:
                 break;
-            case RESIZE:
-                resize(record);
-                break;
-            case FLIP:
-                flip(record);
-                break;
-            case LIGHTEN:
-                lighten(record);
-                break;
-            case DARKEN:
-                darken(record);
-                break;
-            case STITCH:
-                stitch(record);
-                break;
-            case CANNY:
-                cannyEdgeDetection(record);
-                break;
-            case FACE:
-                faceDetection(record);
-                break;
-            case HISTORY:
-                std::cout << record.toString() << std::endl;
-                break;
-            case RESTORE:
-                restore(record);
-                break;
-            case UNDO:
-                current = record.getLast().clone();
-                break;
-            case REDO:
-                current = record.getNext().clone();
-                break;
-            case SAVE:
+            case Operation::OP_EXIT:
                 active = false;
-                saveFile(record, active);
                 break;
-            case EXIT:
-                attemptExit(record, active);
+            case Operation::OP_SAVE:
+                active = OP_TABLE.at("SAVE") -> operate(record) != Operation::OP_EXIT;
                 break;
             default:
-                printf("-- Invalid operation request. --\n");
+                std::cout << "Invalid status: " << std::to_string(opStatus) << std::endl;
                 break;
         }
 
-        cv::namedWindow("Editor Display", cv::WINDOW_AUTOSIZE);
-        cv::imshow("Editor Display", record.getCurrent());
-        cv::waitKey(0);
-        cv::destroyWindow("Editor Display");
+        // cv::namedWindow("Editor Display", cv::WINDOW_AUTOSIZE);
+        // cv::imshow("Editor Display", record.getCurrent());
+        // cv::waitKey(0);
+        // cv::destroyWindow("Editor Display");
     }
 
     // cap.close();
