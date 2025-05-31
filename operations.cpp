@@ -29,6 +29,7 @@ int Dilate::operate(Record& record)
     cv::dilate(current, edited, kernel, cv::Point(-1, -1), iterations, cv::BORDER_CONSTANT, cv::morphologyDefaultBorderValue());
 
     record.push(edited, "DILATE");
+    std::cout << "Successfully dilated image with a kernel size of " << kernelDims << " " << iterations << " times." << std::endl;
     
     return OP_SUCCESS;
 }
@@ -54,6 +55,8 @@ int Erode::operate(Record& record)
     cv::erode(current, edited, kernel, cv::Point(-1, -1), iterations, cv::BORDER_CONSTANT, cv::morphologyDefaultBorderValue());
 
     record.push(edited, "ERODE");
+    std::cout << "Successfully eroded image with a kernel size of " << kernelDims << " " << iterations << " times." << std::endl;  
+
     return OP_SUCCESS;
 }
 
@@ -75,6 +78,8 @@ int Resize::operate(Record& record)
     cv::resize(current, edited, cv::Size(), fx, fy, interpolation);
 
     record.push(edited, "RESIZE");
+    std::cout << "Successfully resized image by a factor of " << factor << "." << std::endl;
+
     return OP_SUCCESS;
 }
 
@@ -96,6 +101,7 @@ int Flip::operate(Record& record)
     cv::flip(current, edited, flipMode);
 
     record.push(edited, "FLIP");
+    std::cout << "Successfully flipped image " << modeString << "." << std::endl;
     return OP_SUCCESS;
 }
 
@@ -114,6 +120,8 @@ int Lighten::operate(Record& record)
     current.convertTo(edited, -1, 1, beta);
 
     record.push(edited, "LIGHTEN");
+    std::cout << "Successfully lightened image by  " << beta << "." << std::endl;
+
     return OP_SUCCESS;
 }
 
@@ -132,6 +140,8 @@ int Darken::operate(Record& record)
     current.convertTo(edited, -1, 1, -beta);
 
     record.push(edited, "DARKEN");
+    std::cout << "Successfully darkened image by  " << beta << "." << std::endl;
+
     return OP_SUCCESS;
 }
 
@@ -161,6 +171,8 @@ int Stitch::operate(Record& record)
     }
 
     record.push(edited, "STITCH");
+    std::cout << "Successfully stitched images together in " << modeString << " mode." << std::endl;
+
     return OP_SUCCESS;
 }
 
@@ -189,6 +201,9 @@ int Canny::operate(Record& record)
     cv::Canny(current, edited, lowerThreshold, upperThreshold, kernelSize);
 
     record.push(edited, "CANNY");
+    std::cout << "Successfully computed edges with the thresholds (" << lowerThreshold << "," << upperThreshold \
+        << ") and kernel size of " << kernelSize << "." << std::endl;
+
     return OP_SUCCESS;
 }
 
@@ -216,6 +231,8 @@ int Face::operate(Record& record)
     }
 
     record.push(edited, "FACE");
+    std::cout << "Successfully detected " << faces.size().height << " faces." << std::endl;
+
     return OP_SUCCESS;
 }
 
@@ -238,6 +255,7 @@ int Restore::operate(Record& record)
         record.push(source, "ORIGINAL");
     }
 
+    std::cout << "Successfully restored image." << std::endl;
     return OP_SUCCESS;
 }
 
@@ -248,7 +266,7 @@ int Save::operate(Record& record)
     cv::Mat current = record.getCurrent();
     
     std::string outputName;
-    std::string outPromptString = "Please enter the name of the output file (extension included):\n";
+    std::string outPromptString = "Please enter the name of the output file (extension included): ";
     std::vector<std::string> validInputs = {};
     if (stringInputValidator(outputName, 3, outPromptString, validInputs)) { return OP_FAILURE; }
     imwrite(outputName, current);
@@ -258,6 +276,8 @@ int Save::operate(Record& record)
     if (ynInputValidator(continueOps, 3, contPromptString)) { return OP_FAILURE; }
     
     record.push(current, "SAVE");
+    std::cout << "Successfully saved image to  " << outputName << "." << std::endl;
+
     return continueOps ? OP_SUCCESS : OP_EXIT;
 }
 
@@ -280,6 +300,8 @@ int Exit::operate(Record& record)
             return OP_SUCCESS;
         }
     }
+
+    std::cout << "Exiting program..." << std::endl;
     return OP_EXIT;
 }
 
@@ -295,6 +317,7 @@ int History::operate(Record& record)
 /// @param record record of recent images and their operations
 int Undo::operate(Record& record)
 {
+    std::cout << "Undoing last operation." << std::endl;
     record.getLast();
     return OP_SUCCESS;
 }
@@ -303,6 +326,7 @@ int Undo::operate(Record& record)
 /// @param record record of recent images and their operations
 int Redo::operate(Record& record)
 {
+    std::cout << "Redoing last operation." << std::endl;
     record.getNext();
     return OP_SUCCESS;
 }

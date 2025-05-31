@@ -38,7 +38,6 @@ int loadFile(cv::Mat& source)
             return 0;
         }
     }
-
     return 0;
 }
 
@@ -46,7 +45,6 @@ int main(int argc, char* argv[])
 {
     Record record(RECORD_SIZE);
     cv::Mat source;
-    // Videocapture cap;
     File f;
     
     bool active = true;
@@ -73,7 +71,10 @@ int main(int argc, char* argv[])
         }
         stringToUpper(opInput);
         
+        printf("-------------------------------------------------------------------\n");
         int opStatus = OP_TABLE.at(opInput) -> operate(record);
+        printf("-------------------------------------------------------------------\n");
+        
         switch(opStatus){
             case Operation::OP_FAILURE:
                 std::cout << "Operation failed: " << opInput << std::endl;
@@ -97,7 +98,6 @@ int main(int argc, char* argv[])
         // cv::destroyWindow("Editor Display");
     }
 
-    // cap.close();
     cv::destroyAllWindows();
     return 0;
 }

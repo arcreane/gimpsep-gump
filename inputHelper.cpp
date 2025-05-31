@@ -63,7 +63,7 @@ int stringInputValidator(std::string& inputtedString, int retries, std::string p
 {
     int attempts = 0;
     while(attempts < retries) {
-        std::cout << promptString << std::endl;
+        std::cout << promptString;
         std::cin >> inputtedString;
         std::string capString = inputtedString;
         stringToUpper(capString);
@@ -92,7 +92,7 @@ int intInputValidator(int& inputtedInt, int retries, std::string promptString, s
     int attempts = 0;
     std::string inputtedString;
     while(attempts < retries) {
-        std::cout << promptString << std::endl;
+        std::cout << promptString;
         std::cin >> inputtedString;
 
         if (parseInt(inputtedString, inputtedInt) && (validRange.first == validRange.second || \
@@ -120,7 +120,7 @@ int doubleInputValidator(double& inputtedDouble, int retries, std::string prompt
     int attempts = 0;
     std::string inputtedString;
     while(attempts < retries) {
-        std::cout << promptString << std::endl;
+        std::cout << promptString;
         std::cin >> inputtedString;
 
         if (parseDouble(inputtedString, inputtedDouble) && (validRange.first == validRange.second || \
@@ -151,7 +151,7 @@ int ynInputValidator(bool& inputtedBool, int retries, std::string promptString)
 
     /// stringInputValidator(inputtedString, 3, promptString, validTrue);
     while(attempts < retries) {
-        std::cout << promptString << std::endl;
+        std::cout << promptString;
         std::cin >> inputtedString;
         stringToUpper(inputtedString);
 
