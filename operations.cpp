@@ -193,10 +193,17 @@ int Canny::operate(Record& record)
     std::pair<double, double> validUTRange (lowerThreshold, DBL_MAX);
     if (doubleInputValidator(upperThreshold, 3, promptUTString, validUTRange)) { return OP_FAILURE; }
 
+    std::string kernelString;
     int kernelSize;
-    std::string promptKernelString = "Please enter the desires kernel size: ";
-    std::pair<int, int> validKernelRange (0, INT_MAX);
-    if (intInputValidator(kernelSize, 3, promptKernelString, validKernelRange)) { return OP_FAILURE; }
+    std::string promptKernelString = "Please enter the desired kernel size [1,3,5,7]: ";
+    std::vector<std::string> validSizes = {"1", "3", "5", "7"}; // 1, 3, 6, and 7 are the valid Sobel operator sizes for cv::Canny
+    if (stringInputValidator(kernelString, 3, promptKernelString, validSizes)) { return OP_FAILURE; }
+    kernelSize = std::stoi(kernelString);
+
+    // int kernelSize;
+    // std::string promptKernelString = "Please enter the desires kernel size: ";
+    // std::pair<int, int> validKernelRange (0, INT_MAX);
+    // if (intInputValidator(kernelSize, 3, promptKernelString, validKernelRange)) { return OP_FAILURE; }
 
     cv::Canny(current, edited, lowerThreshold, upperThreshold, kernelSize);
 
