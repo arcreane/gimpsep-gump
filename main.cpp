@@ -41,12 +41,25 @@ int loadFile(cv::Mat& source)
     return 0;
 }
 
+void printWelcomeMessage()
+{
+    printf("####################################################################\n");
+    printf("\
+          ______     __  __     __    __     ______  \n\
+         /\\  ___\\   /\\ \\/\\ \\   /\\ \"-./  \\   /\\  == \\ \n\
+         \\ \\ \\__ \\  \\ \\ \\_\\ \\  \\ \\ \\-./\\ \\  \\ \\  _-/ \n\
+          \\ \\_____\\  \\ \\_____\\  \\ \\_\\ \\ \\_\\  \\ \\_\\   \n\
+           \\/_____/   \\/_____/   \\/_/  \\/_/   \\/_/       \n\n");                                    
+    printf("####################################################################\n\n");
+}
+
 int main(int argc, char* argv[])
 {
     Record record(RECORD_SIZE);
     cv::Mat source;
     File f;
-    
+    printWelcomeMessage();
+
     bool active = true;
     bool updateRecord = true;
     std::string opInput;
